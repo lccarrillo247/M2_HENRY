@@ -3,10 +3,27 @@ import React from 'react';
 
 export default class Animals extends React.Component {
   constructor(props) {
-    super();
+    super(props); //Por qué ptas?
   }
 
   render() {
-    return <div></div>
+
+    const {animals} = this.props;
+
+    return (
+    <div>
+      {animals.map((animal, index) => (  // Cómo foxys funciona "index" acá
+        <div key={index}>
+        <h5>{animal.name}</h5>
+        <img src={animal.image}
+        alt={animal.name}
+        width='300px' 
+        />
+        <br></br>
+        <span>{animal.specie}</span>
+        </div>
+        ))}
+    </div>
+    )
   }
 }
