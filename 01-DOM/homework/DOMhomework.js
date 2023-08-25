@@ -78,12 +78,13 @@ function buildToDo(todo, index) {
 
 function buildToDos(toDos) {
   // Tu código acá:
-  let array = toDos.map(function(todo, index) {
+  let array = toDos.map(function(todo, index) { // .map((todo, index) => buildToDo(todo, index))
     return buildToDo(todo, index)
   })
 
   return array;
 }
+
 
 // La función 'displayToDos' se va a encargar de que se vean los toDo's en pantalla
 //  1) Seleccionr el elemento cuyo id es 'toDoContainer' y almacenarlo en una variable denominada 'toDoContainer'
@@ -96,11 +97,11 @@ function buildToDos(toDos) {
 
 function displayToDos() {
   // Tu código acá:
-  let toDoContainer = document.querySelector('#toDoContainer');
+  let toDoContainer = document.querySelector('#toDoContainer'); // getElementById('ToDoContainer') *Sin # por el método específico
   toDoContainer.innerHTML = '';
   let resultado = buildToDos(toDoItems);
   for (const elemento of resultado) {
-    toDoContainer.appendChild(elemento);
+    toDoContainer.appendChild(elemento); // result.map(elemento => toDoContainer.appendChild(elemento))
   }
 
 }
@@ -116,9 +117,9 @@ function displayToDos() {
 
 function addToDo() {
   // Tu código acá:
-  let input = document.querySelector('#toDoInput');
+  let input = document.querySelector('#toDoInput'); // let descripcion = document.getElementById('toDoInput').value
   if(input.value !== '') {
-  let toDo2 = new ToDo(input.value);
+  let toDo2 = new ToDo(input.value); // let tarea = new ToDo(descripcion)
   toDoItems.push(toDo2);
   input.value = '';
   displayToDos();
@@ -132,7 +133,7 @@ function addToDo() {
 
 // Tu código acá:
 const div = document.querySelector('#addButton');
-    div.addEventListener('click', addToDo);
+    div.addEventListener('click', addToDo); // document.getElementById('addButton').addEventListener('click', addToDo)
 
 // La función completeToDo se va a ejecutar cuando queramos completar un todo
 // [NOTA: Algunas cuestiones a tener en cuenta

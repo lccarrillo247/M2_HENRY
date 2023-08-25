@@ -9,6 +9,14 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
   // usa matchFunc para identificar elementos que matchien
 
   // TU CÓDIGO AQUÍ
+  if (matchFunc(startEl)) resultSet.push(startEl);
+  for (const child of startEl.children) {
+    const result = traverseDomAndCollectElements(matchFunc, child);
+    resultSet = [...resultSet, ...result];
+  }
+
+  return resultSet;
+
 };
 
 // Detecta y devuelve el tipo de selector
@@ -16,6 +24,27 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
 
 var selectorTypeMatcher = function (selector) {
   // tu código aquí
+  // switch (selector) {
+  //   case selector.charAt(0) === '#':
+  //     return 'id';
+  //     case selector.charAt(0) === '.':
+  //       return 'class';
+  //       case selector.includes('.'):
+  //         return 'tag.class';
+  //           break;
+  //           default:
+  //             return 'tag';
+  // };
+
+  if (selector.charAt(0) === '#') { // selector[0]
+    return 'id'
+  } else if (selector.charAt(0) === '.') {
+    return 'class';
+  } else if(selector.includes('.')) {
+    return 'tag.class';
+  } else {
+    return 'tag';
+  };
 };
 
 // NOTA SOBRE LA FUNCIÓN MATCH
@@ -27,9 +56,28 @@ var matchFunctionMaker = function (selector) {
   var selectorType = selectorTypeMatcher(selector);
   var matchFunction;
   if (selectorType === "id") {
+    matchFunction = (element) => {
+      if('#' + element.id === selector) return true;
+      return false;
+    };
   } else if (selectorType === "class") {
+    matchFunction = (element) => {
+      for (const className of element.classList) {
+        if ('.' + className === selector) return true;
+        }
+        return false;
+    };
   } else if (selectorType === "tag.class") {
+    matchFunction = (element) => {
+    const [tag, className] = selector.split('.');
+
+    return matchFunctionMaker(tag)(element) && matchFunctionMaker('.' + className)(element);
+  };
   } else if (selectorType === "tag") {
+    matchFunction = (element) => {
+      if(element.tagName.toLowerCase() === selector) return true;
+      return false;
+    };
   }
   return matchFunction;
 };
