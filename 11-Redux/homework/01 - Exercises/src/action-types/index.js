@@ -3,5 +3,5 @@ const DECREMENTO = 'DECREMENTO';
 
 module.exports = {
   INCREMENTO,
-  DECREMENTO
+  DECREMENTO,
 }
