@@ -2,6 +2,10 @@
 
 .home {
   .intro {
+    .header-img {
+      border-radius: 18px;
+      margin-top:5px;
+    }
     h2 {
       padding: 15px;
     }
@@ -55,6 +59,10 @@
       }
 
       .btn {
+        .button(@btn-bg-color, white, 15px);
+        height: 40px;
+        width:120px;
+        .flex(row, center, center)
       }
     }
 
@@ -66,6 +74,31 @@
         width: 100%;
         height: auto;
         border-radius: 10px;
+      }
+    }
+  }
+}
+
+@media @phone {
+  .home {
+    .intro{
+      padding: 10 px;
+      .header-img{
+        width: 100%;
+      }
+    }
+    .music-images {
+      .ondas, .tecnologia {
+        display: none;
+      }
+      .auricular {
+        width: 100%;
+      }
+    }
+    .actual {
+      flex-direction: column-reverse;
+      .actual-img, .actual-text {
+        width: 100%;
       }
     }
   }
